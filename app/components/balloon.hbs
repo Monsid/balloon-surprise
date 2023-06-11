@@ -1,12 +1,12 @@
 {{!-- floating-balloon.hbs --}}
 
-<div class={{concat "balloon" @index}} {{did-insert (action this.floatBalloon @index)}}>
-  <img src="assets/images/balloon.png" alt="Balloon" width="50" height="50" />
+<div class={{concat "balloon" @index}} {{did-insert (action this.floatBalloon @index)}}  width={{@maxWidth}}>
+  <img src="assets/images/balloon.png" alt="Balloon" width={{@maxWidth}} />
 </div>
 
 <style>
   [class^="balloon"] {
-    position: absolute;
+    position: relative;
   }
 
 </style>

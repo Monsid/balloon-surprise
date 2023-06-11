@@ -5,12 +5,20 @@ import { later } from '@ember/runloop';
 export default class Balloon extends Component {
     @action
     floatBalloon(index) {
+        document.body.style.overflow = 'hidden';
         const balloonElement = document.querySelector('.balloon' + index);
-        let position = window.innerHeight; // Initial position at the bottom of the screen
+        let position = Math.random() * ((window.innerHeight - balloonElement.offsetHeight - 10) * 2); // Initial position at the bottom of the screen
         console.log('balloon' + index);
         console.log(balloonElement);
-        balloonElement.style.right = `${(index + 1) * 50}px`;
-        const speed = 2; // Floating speed in pixels per frame
+
+
+
+        const horizontalRandomizer = 5; // Adjust this based on your desired range
+
+        balloonElement.style.padding = Math.random() * horizontalRandomizer + 'px';
+        balloonElement.style.right = Math.random() * horizontalRandomizer + 'px';
+        balloonElement.style.left = Math.random() * horizontalRandomizer + 'px';
+        const speed = 0.2; // Floating speed in pixels per frame
 
         // Define the floating animation function
         const floatAnimation = () => {

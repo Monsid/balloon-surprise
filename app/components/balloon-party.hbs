@@ -1,14 +1,17 @@
 
-<div class="balloon-container">
+<div class="balloon-container" {{did-insert (action this.calculateBalloonDimentions @numberOfBalloons)}}>
   {{#each (repeat @numberOfBalloons) as |balloon index|}}
-{{log index}}
-  <Balloon @index={{index}}/>
+    {{log index}}
+  <Balloon @index={{index}} @maxWidth={{this.balloonMaxWidth}} />
 {{/each}}
+
 </div>
 
 <style>
     .balloon-container {
-    position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
 
