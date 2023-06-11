@@ -1,0 +1,15 @@
+
+<div class="balloon-container">
+  {{#each (repeat @numberOfBalloons) as |balloon index|}}
+{{log index}}
+  <Balloon @index={{index}}/>
+{{/each}}
+</div>
+
+<style>
+    .balloon-container {
+    position: relative;
+    }
+
+
+</style>

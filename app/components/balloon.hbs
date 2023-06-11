@@ -1,11 +1,11 @@
-<!-- floating-balloon.hbs -->
+{{!-- floating-balloon.hbs --}}
 
-<div class="balloon" {{did-insert (action this.floatBalloons @delay)}}>
+<div class={{concat "balloon" @index}} {{did-insert (action this.floatBalloon @index)}}>
   <img src="assets/images/balloon.png" alt="Balloon" width="50" height="50" />
 </div>
 
 <style>
-  .balloon {
+  [class^="balloon"] {
     position: absolute;
   }
 
