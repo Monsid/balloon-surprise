@@ -1,11 +1,30 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { later } from '@ember/runloop';
+import { tracked } from '@glimmer/tracking';
 
 export default class Balloon extends Component {
+
+
+    get speed() {
+        console.log(this.deviceAspectRatio);
+        if (this.deviceAspectRatio < 0.5) {
+            return 1.4;
+        } else if (this.deviceAspectRatio < 1) {
+            return 1.1;
+        } else if (this.deviceAspectRatio < 1.5) {
+            return 0.8;
+        } else if (this.deviceAspectRatio < 2) {
+            return 0.5;
+        } else {
+            return 0.2;
+        }
+    }
+
     @action
     floatBalloon(index) {
-        document.body.style.overflow = 'hidden';
+
+        let speed = this.speed;
         const balloonElement = document.querySelector('.balloon' + index);
         let position = Math.random() * ((window.innerHeight - balloonElement.offsetHeight - 10) * 2); // Initial position at the bottom of the screen
         console.log('balloon' + index);
@@ -16,9 +35,7 @@ export default class Balloon extends Component {
         const horizontalRandomizer = 5; // Adjust this based on your desired range
 
         balloonElement.style.padding = Math.random() * horizontalRandomizer + 'px';
-        balloonElement.style.right = Math.random() * horizontalRandomizer + 'px';
-        balloonElement.style.left = Math.random() * horizontalRandomizer + 'px';
-        const speed = 0.2; // Floating speed in pixels per frame
+
 
         // Define the floating animation function
         const floatAnimation = () => {
@@ -47,5 +64,10 @@ export default class Balloon extends Component {
     stopFloatingBalloon() {
         // Stop the floating animation by canceling the requestAnimationFrame
         cancelAnimationFrame(this.floatAnimation);
+    }
+    get deviceAspectRatio() {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        return width / height;
     }
 }
