@@ -2,9 +2,10 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { later } from '@ember/runloop';
 import { tracked } from '@glimmer/tracking';
+import Confetti from 'confetti-js';
 
 export default class Balloon extends Component {
-
+    @tracked isPopped;
 
     get speed() {
         console.log(this.deviceAspectRatio);
@@ -22,20 +23,21 @@ export default class Balloon extends Component {
     }
 
     @action
-    floatBalloon(index) {
+    popBalloon() {
+        this.isPopped = true;
+    }
 
+    @action
+    floatBalloon(index) {
         let speed = this.speed;
         const balloonElement = document.querySelector('.balloon' + index);
-        let position = Math.random() * ((window.innerHeight - balloonElement.offsetHeight - 10) * 2); // Initial position at the bottom of the screen
-        console.log('balloon' + index);
-        console.log(balloonElement);
-
-
+        let position =
+            Math.random() *
+            ((window.innerHeight - balloonElement.offsetHeight - 10) * 2); // Initial position at the bottom of the screen
 
         const horizontalRandomizer = 5; // Adjust this based on your desired range
 
         balloonElement.style.padding = Math.random() * horizontalRandomizer + 'px';
-
 
         // Define the floating animation function
         const floatAnimation = () => {
@@ -47,6 +49,9 @@ export default class Balloon extends Component {
             // Check if the balloon has floated off the screen
             if (position < -balloonElement.offsetHeight) {
                 // Stop the floating animation
+                this.stopFloatingBalloon();
+            } else if (this.isPopped) {
+                // Stop the floating animation, dont do anything at all?
                 this.stopFloatingBalloon();
             } else {
                 // Continue the animation on the next frame
@@ -61,6 +66,9 @@ export default class Balloon extends Component {
         later(this, this.stopFloatingBalloon, 5000); // Stop floating after 5 seconds
     }
 
+    @action
+    explodeBalloon() {}
+    @action
     stopFloatingBalloon() {
         // Stop the floating animation by canceling the requestAnimationFrame
         cancelAnimationFrame(this.floatAnimation);

@@ -62,6 +62,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-qunit": "^7.3.4",
     "loader.js": "^4.7.0",
+    "more-ember-confetti": "^1.0.1",
     "prettier": "^2.8.7",
     "qunit": "^2.19.4",
     "qunit-dom": "^2.0.0",
@@ -79,6 +80,7 @@
     "edition": "octane"
   },
   "dependencies": {
+    "confetti-js": "^0.0.18",
     "ember-cli-sass": "^11.0.1"
   }
 }

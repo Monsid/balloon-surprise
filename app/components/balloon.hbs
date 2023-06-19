@@ -1,10 +1,14 @@
-{{!-- floating-balloon.hbs --}}
-
-<div class={{concat "balloon" @index}} {{did-insert (action this.floatBalloon @index)}}  width={{@maxWidth}}>
-  <img src="assets/images/balloon.png" alt="Balloon" width={{@maxWidth}} />
+<div class="balloon" {{on "click" this.popBalloon}}>
+  <div class={{concat "balloon" @index}} {{did-insert (action this.floatBalloon @index)}} width={{@maxWidth}}>
+    <img src="assets/images/balloon.png" alt="Balloon" width={{@maxWidth}} />
+  </div>
+  {{#if this.isPopped}}
+   {{confetti}}
+  {{/if}}
 </div>
 
 <style>
+
   [class^="balloon"] {
     position: relative;
   }
